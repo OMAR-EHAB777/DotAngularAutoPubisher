@@ -139,7 +139,7 @@ print("Backend and frontend publishing, file copying, compression, and uploading
 #region Prepare the email content
 print("Start Sending Emails.")
 subject = "New Pos Release !!!"
-recipient_emails = ["omarehabdev@gmail.com"
+recipient_emails = ["omarehabdev@gmail.com",
                     "ahmadsamirnabil@gmail.com","Amrragaay1995@outlook.com"
                     ,"ysmaher@gmail.com"
                     ,"Mahmoodkarman@yahoo.com"]  # List of recipient email addresses
