@@ -5,6 +5,7 @@ import subprocess
 import os
 import shutil
 from datetime import datetime
+import sys
 from Email_Automate import send_email
 from Upload_Automate import upload_to_drive 
 #endregion
@@ -25,18 +26,21 @@ if not script_directory:
 #endregion
     
 #region Define project settings for .Net Backend
-backend_project_path = os.path.join(script_directory, "Pos_Backend", "POS.Web")
-backend_publish_output_path = os.path.join(script_directory, f"Pos-Back-{current_date}")
-backend_rar_output_path = os.path.join(script_directory, f"Pos-Back-{current_date}.rar")
+backend_project_path = os.path.join(Path(script_directory).parent, "POS_BackEnd", "POS.Web")
+backend_publish_output_path = os.path.join(Path(script_directory).parent, f"Pos-Back-{current_date}")
+backend_rar_output_path = os.path.join(Path(script_directory).parent, f"Pos-Back-{current_date}.rar")
+backend_repo_path =os.path.join(Path(script_directory).parent, "POS_BackEnd")
 #endregion
 
 #region Define project settings for Angular frontend
-frontend_project_path = os.path.join(script_directory, "Front", "POSFront")
-frontend_build_output_path = os.path.join(frontend_project_path, "dist")  # Adjust based on your Angular build config
-frontend_publish_output_path = os.path.join(script_directory, f"Pos-Front-{current_date}")
-frontend_rar_output_path = os.path.join(script_directory, f"Pos-Front-{current_date}.rar")
-web_config_path = os.path.join(script_directory, "web.config")  # Adjust the path if necessary
+frontend_project_path = os.path.join(Path(script_directory).parent, "Front", "POSFront")
+frontend_build_output_path = os.path.join(frontend_project_path, "dist")
+frontend_publish_output_path = os.path.join(Path(script_directory).parent, f"Pos-Front-{current_date}")
+frontend_rar_output_path = os.path.join(Path(script_directory).parent, f"Pos-Front-{current_date}.rar")
+frontend_repo_path =os.path.join(Path(script_directory).parent, "Front", "POSFront")
+web_config_path = os.path.join(script_directory, "web.config")
 #endregion
+
 
 #region Define the path to the Angular app's output directory (adjust the 'POS' as necessary to match your app's output folder name)
 angular_app_output_path = os.path.join(frontend_publish_output_path, "POS")
@@ -62,6 +66,26 @@ def clear_file(file_path):
             os.remove(file_path)
     except OSError as e:
         print(f"Error deleting file {file_path}: {e.strerror}")
+#endregion
+#region pull recents before publish
+def pull_latest_changes(repo_path):
+    """
+    Pulls the latest changes from the master branch of the given repository.
+    """
+    try:
+        # Change directory to the repo
+        os.chdir(repo_path)
+        # Pull the latest changes from the master branch
+        subprocess.run(['git', 'checkout', 'master'], check=True)
+        subprocess.run(['git', 'pull', 'origin', 'master'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to pull latest changes in {repo_path}: {e}")
+        sys.exit(1)
+
+# Before publishing, pull the latest changes for the backend
+pull_latest_changes(backend_repo_path)
+# Before building, pull the latest changes for the frontend
+pull_latest_changes(frontend_repo_path)
 #endregion
 
 #region publishing
@@ -115,7 +139,10 @@ print("Backend and frontend publishing, file copying, compression, and uploading
 #region Prepare the email content
 print("Start Sending Emails.")
 subject = "New Pos Release !!!"
-recipient_emails = ["omarehabdev@gmail.com", "ahmadsamirnabil@gmail.com","Amrragaay1995@outlook.com"]  # List of recipient email addresses
+recipient_emails = ["omarehabdev@gmail.com"
+                    "ahmadsamirnabil@gmail.com","Amrragaay1995@outlook.com"
+                    ,"ysmaher@gmail.com"
+                    ,"Mahmoodkarman@yahoo.com"]  # List of recipient email addresses
 sender = os.environ.get("SENDER_EMAIL")  # Your Gmail address
 sender_password = os.environ.get("SENDER_PASSWORD")  # Your Gmail password or app password
 
