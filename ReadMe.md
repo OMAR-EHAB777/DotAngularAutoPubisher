@@ -21,7 +21,7 @@ Before you begin, ensure you have the following installed:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/OMAR-EHAB777/DotAngularAutoPubisher.git
 cd your-repo-name
 ```
 
@@ -66,9 +66,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Support
 
-For support or queries, contact [your-email@example.com](mailto:your-email@example.com).
+For support or queries, contact [omarehabdev@gmail.com](mailto:your-email@example.com).
 ```
-
-Replace placeholders like `https://github.com/your-username/your-repo-name.git`, `[link-to-contributing-guide]`, and `[your-email@example.com]` with your actual repository link, contribution guidelines link, and contact email, respectively.
-
-This README provides a clear overview of your project and instructions on how to set it up and use it. Make sure to add any additional specific details that might be necessary for understanding or using your project.
