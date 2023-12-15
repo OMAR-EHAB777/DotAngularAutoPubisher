@@ -1,0 +1,31 @@
+# Ignore environment variables and configuration files
+.env
+config.json
+
+# Ignore Python compiled files and directories
+__pycache__/
+*.pyc
+
+# Ignore directories containing locally installed modules
+node_modules/
+
+# Ignore sensitive information and credentials
+credentials.json
+token.json
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore specific files that might contain sensitive data or are not needed in the repository
+*.log
+*.rar
+# Ignore specific configuration and image files
+web.config
+newRelease.gif
+
+# Ignore specific executable files
+mongodump.exe
+
+# Other files and directories to ignore (add as needed)
+
