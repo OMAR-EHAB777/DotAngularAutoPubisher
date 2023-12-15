@@ -1,5 +1,3 @@
-Certainly! Based on the details of your project, here's a sample README file you can use for your GitHub repository. Feel free to modify it as necessary to better fit your project's specifics.
-
 ```markdown
 # Automated .NET and Angular Deployment
 
