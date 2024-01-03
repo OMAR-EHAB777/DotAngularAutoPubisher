@@ -30,6 +30,9 @@ backend_project_path = os.path.join(Path(script_directory).parent, "POS_BackEnd"
 backend_publish_output_path = os.path.join(Path(script_directory).parent, f"Pos-Back-{current_date}")
 backend_rar_output_path = os.path.join(Path(script_directory).parent, f"Pos-Back-{current_date}.rar")
 backend_repo_path =os.path.join(Path(script_directory).parent, "POS_BackEnd")
+mongo_dump_path =os.path.join(script_directory, "mongodump.exe")
+
+
 #endregion
 
 #region Define project settings for Angular frontend
@@ -115,7 +118,10 @@ shutil.copytree(frontend_build_output_path, frontend_publish_output_path)
 #region Step 4: Copy web.config to Angular app's output directory inside the publish directory
 shutil.copy(web_config_path, angular_app_output_path)
 #endregion
-
+#region Step 4: Copy mongodump to backend
+# app's output directory inside the publish directory
+shutil.copy(mongo_dump_path, backend_rar_output_path)
+#endregion
 #region Step 5: Compress the published .NET backend app to .rar
 clear_file(backend_rar_output_path)
 os.makedirs(os.path.dirname(backend_rar_output_path), exist_ok=True)
@@ -142,9 +148,10 @@ subject = "New Pos Release !!!"
 recipient_emails = ["omarehabdev@gmail.com",
                     "ahmadsamirnabil@gmail.com","Amrragaay1995@outlook.com"
                     ,"ysmaher@gmail.com"
-                    ,"Mahmoodkarman@yahoo.com"]  # List of recipient email addresses
-sender = os.environ.get("SENDER_EMAIL")  # Your Gmail address
-sender_password = os.environ.get("SENDER_PASSWORD")  # Your Gmail password or app password
+                    ,"Mahmoodkarman@yahoo.com",
+                    "mostafaatef6066@gmail.com"]  # List of recipient email addresses
+sender = "ferpbooking@gmail.com"  # Your Gmail address
+sender_password = "ecby njar xpdf cynt"  # Your Gmail password or app password
 
 image_path = os.path.join(script_directory,"newRelease.gif") # Path to your image
 html_body = f"""
